@@ -21,7 +21,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var name = req.body.name;
     var price = req.body.price;
     var image = req.body.image;
-    var desc = req.body.description;
+    var desc = req.sanitize(req.body.description);
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -68,6 +68,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
 
 //UPDATE CAMPGROUND ROUTE
 router.put("/:id", middleware.checkCampgroundOwnership,function(req, res){
+    req.body.campground.description = req.sanitize(req.body.campground.description);
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
         if(err){
             res.redirect("/campgrounds");

@@ -5,6 +5,7 @@ var express         = require("express"),
     localStrategy   = require("passport-local"),
     methodOverride  = require("method-override"),
     flash           = require("connect-flash"),
+    expressSanitizer= require("express-sanitizer"),
     Campground      = require("./models/campground"),
     Comment         = require("./models/comment"),
     User            = require("./models/user"),
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 app.use(flash());
 // seedDB();
 
