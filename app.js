@@ -30,6 +30,8 @@ app.use(expressSanitizer());
 app.use(flash());
 // seedDB();
 
+app.locals.moment = require('moment');
+
 //*********************************************
 //  PASSPORT CONFIGS
 //*********************************************

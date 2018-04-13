@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <p class="card-title text-muted float-right">Php. <%= campground.price %>/night</p>
                     <h4 class="card-title"><a><%= campground.name %></a></h1>
-                    <p><em>Submitted by:</em> <%= campground.author.username %></p>
+                    <p><em>Submitted by:</em> <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></p>
                     <hr>
                     <p class="card-text"><%= campground.description %></p>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="row">
                         <% campground.comments.forEach(function(comment){ %>
                                 <div class="col-md-12">
-                                    <span class="float-right">10 days ago</span>
+                                    <span class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
                                     <strong><%= comment.author.username %></strong>
                                     <div>
                                         <%= comment.text %>
