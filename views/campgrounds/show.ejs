@@ -15,7 +15,7 @@
                     <hr>
                     <p class="card-text"><%= campground.description %></p>
                 </div>
-                <% if(currentUser && campground.author.id.equals(currentUser._id)) { %>
+                <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
                     <div class="card-footer"> 
                         <a class="btn btn-warning btn-sm" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
                         <form class="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
@@ -43,7 +43,7 @@
                                     <strong><%= comment.author.username %></strong>
                                     <div>
                                         <%= comment.text %>
-                                        <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                        <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
                                             <div class="float-right">
                                                 <a  class="btn btn-sm btn-warning" 
                                                     href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit
