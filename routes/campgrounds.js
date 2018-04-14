@@ -27,32 +27,25 @@ router.get("/", function(req, res){
 
 //CREATE - add new campground to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
-//get data from form and add to array
-    var name = req.body.name;
-    var price = req.body.price;
-    var image = req.body.image;
-    var desc = req.sanitize(req.body.description);
-    var author = {
-        id: req.user._id,
-        username: req.user.username
-    };
-    
-    geocoder.geocode(req.body.location, function(err, data){
+    geocoder.geocode(req.body.campground.location, function(err, data){
         if(err || !data.length) {
             req.flash("error", "Invalid address or location");
+            console.log(err)
             return res.redirect("back");
         }
-        var lat = data[0].latitude;
-        var lng = data[0].longitude;
-        var location = data[0].formattedAddress;
-        var newCampground = {name: name, price: price, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
+        req.body.campground.lat = data[0].latitude;
+        req.body.campground.lng = data[0].longitude;
+        req.body.campground.location = data[0].formattedAddress;
+        req.body.campground.description = req.sanitize(req.body.campground.description);
+        req.body.campground.author = { id: req.user._id, username: req.user.username};
         //Create a new Campground and save to DB
-        Campground.create(newCampground, function(err, newlyCreated){
+        Campground.create(req.body.campground, function(err, newlyCreated){
             if(err){
                 req.flash("error", err.message);
                 console.log(err);
             } else {
                 req.flash("success", "Successfully added campground!");
+                console.log(newlyCreated);
                 res.redirect("/campgrounds");
             }
         });    
@@ -89,7 +82,7 @@ router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
 
 //UPDATE CAMPGROUND ROUTE
 router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
-    geocoder.geocode(req.body.location, function(err, data){
+    geocoder.geocode(req.body.campground.location, function(err, data){
         if(err || !data.length) {
                 req.flash("error", "Invalid address or location");
                 return res.redirect("back");

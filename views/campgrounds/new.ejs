@@ -8,23 +8,23 @@
             <form action="/campgrounds" method="POST">
                 <div class="form-group">
                     <label for="inputName">Name</label>
-                    <input class="form-control" id="inputName" type="text" placeholder="Mount Ulap" name="name">
+                    <input class="form-control" id="inputName" type="text" placeholder="Mount Ulap" name="campground[name]">
                 </div>
                 <div class="form-group">
                     <label for="inputPrice">Price</label>
-                    <input class="form-control" id="inputPrice" type="number" placeholder="9.99" name="price" min="0.01" step="0.01">
+                    <input class="form-control" id="inputPrice" type="number" placeholder="9.99" name="campground[price]" min="0.01" step="0.01">
                 </div>
                 <div class="form-group">
                     <label for="inputImageUrl">Image Url</label>
-                    <input class="form-control" id="inputImageUrl"type="text" placeholder="https://images.unsplash.com/..." name="image">   
+                    <input class="form-control" id="inputImageUrl"type="text" placeholder="https://images.unsplash.com/..." name="campground[image]">   
                 </div>
                 <div class="form-group">
                     <label for="inputLocation">Location</label>
-                    <input class="form-control" id="inputLocation" type="text" placeholder="Bagiuo, Philippines" name="location">
+                    <input class="form-control" id="inputLocation" type="text" placeholder="Bagiuo, Philippines" name="campground[location]">
                 </div>
                 <div class="form-group">
                     <label for="inputDescription">Description</label>
-                    <textarea class="form-control" id="inputDescription" type="text" placeholder="This mountain is known for its scenic view…" name="description"></textarea>
+                    <textarea class="form-control" id="inputDescription" type="text" placeholder="This mountain is known for its scenic view…" name="campground[description]"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">SUBMIT!</button>
