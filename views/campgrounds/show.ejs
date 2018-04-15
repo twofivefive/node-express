@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <p class="card-title text-muted float-right">Php. <%= campground.price %>/night</p>
                     <h4 class="card-title"><a><%= campground.name %></a></h1>
-                    <p><em>Submitted by:</em> <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></p>
+                    <p><em>Submitted by:</em><a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a>, <%= moment(campground.createdAt).fromNow() %></p>
                     <hr>
                     <p class="card-text"><%= campground.description %></p>
                 </div>

@@ -1,0 +1,38 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top img" src="<%= user.avatar %>" alt="user profile picture">
+            <div class="card-body">
+                <h4 class="card-title"><%= user.firstName + " " + user.lastName %></h1>
+                <p class="class-subtitle text-muted"> <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
+                <p class="card-description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia sint amet, velit facere, repellendus iste eos voluptate perferendis 
+                    obcaecati nihil neque corporis animi id quaerat atque! Asperiores ab obcaecati ullam.
+                </p>
+                <a href="#" class="btn btn-primary btn-sm">Reset Password</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><%= user.username %>' campgrounds </h4>
+            </div>
+            <ul class="list-group list-group-flush">
+                <% campgrounds.forEach(function(campground) { %>
+                    <a href="/campgrounds/<%= campground.id %>" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1"><%= campground.name %></h5>
+                          <small><%= moment(campground.createdAt).fromNow() %></small>
+                        </div>
+                        <p class="mb-1"><%= campground.description.substring(0,95) %>...</p>
+                    </a>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

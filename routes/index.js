@@ -17,10 +17,13 @@ router.get("/register", function(req, res) {
 
 //Register Logic
 router.post("/register", function(req, res) {
-    var newUser = new User({username: req.body.username});
-    if(req.body.admin === "secretcode123") {
-        newUser.isAdmin = true;
-    }
+    var newUser = new User({
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        avatar: req.body.avatar
+    });
     
     User.register(newUser, req.body.password, function(err, user){
         if(err){
@@ -54,5 +57,25 @@ router.get("/logout", function(req, res) {
     req.flash("success", "Logged you out! Bye!");
     res.redirect("/campgrounds")
 });
+
+// =======================================
+// USER PROFILES
+// =======================================
+router.get("/users/:id", function(req, res) {
+   User.findById(req.params.id, function(err, foundUser){
+       if(err){
+            req.flash("error", "Something went wrong");
+            res.redirect("/");
+       }
+       Campground.find().where("author.id").equals(foundUser._id).exec(function(err, campgrounds) {
+           if(err){
+                req.flash("error", "Something went wrong");
+                res.redirect("/");
+           }  
+           res.render("users/show", {user: foundUser, campgrounds: campgrounds});
+       });
+   }) 
+});
+
 
 module.exports = router;
