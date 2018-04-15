@@ -17,6 +17,7 @@ var express         = require("express"),
 //Requiring Routes
 var campgroundRoutes    = require("./routes/campgrounds"),
     commentsRoutes      = require("./routes/comments"),
+    userRoutes          = require("./routes/user"),
     indexRoutes          = require("./routes/index");
     
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
@@ -57,6 +58,7 @@ app.use(function(req, res, next){
 
 //Route Files Setup
 app.use("/", indexRoutes);
+app.use("/users", userRoutes);
 app.use("/campgrounds/:id/comments", commentsRoutes);
 app.use("/campgrounds",campgroundRoutes);
 
