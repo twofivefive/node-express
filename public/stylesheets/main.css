@@ -58,6 +58,13 @@ body {
     display: inline;
 }
 
+.img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
 /* Google Maps */
 #map {
     height: 400px;
